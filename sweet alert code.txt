@@ -1,7 +1,9 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$('.deleteBtn').click(function(){
-
+			// passing id value into another page
 			let id = $(this).attr("data-id");
 
 			swal({
@@ -24,8 +26,4 @@
 				}
 			});
 		})
-			// for plugin table
-			$(document).ready( function () {
-				// $('#myTable').DataTable();
-			} );
 	</script>
