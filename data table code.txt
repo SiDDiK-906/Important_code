@@ -1,0 +1,7 @@
+//for plugin table
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+			$(document).ready( function () {
+				$('#myTable').DataTable();
+			} );
