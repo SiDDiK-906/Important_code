@@ -1,0 +1,6 @@
+$old_img_path= 'upload/'.$assoc['image'];
+						if ($assoc['image'] !='default.png') {
+							if (file_exists($old_img_path)) {
+								unlink($old_img_path);
+							}
+						}

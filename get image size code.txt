@@ -1,0 +1,3 @@
+list($width, $height) = getimagesize($_FILES["image"]['tmp_name']);
+if ($height<=500 AND $width<=500) {}
+else{}

@@ -1,0 +1,105 @@
+<?php 
+	session_start();
+	require_once('db.php');
+
+	if ($_SERVER['REQUEST_METHOD']== 'POST') {
+		$id = $_GET['id'];
+
+		$category = $_POST['category'];
+		$title = $_POST['title'];
+		$summary = $_POST['summary'];
+		// $slug = $_POST['slug'];
+		$slug = strtolower(str_replace([',','-','.',' ','\/'],'-',$_POST['title']));
+		$thumbnail = $_FILES['thumbnail']['name'];
+		$image = $_FILES['image']['name'];
+
+		$select= "SELECT count(*) as total_slug,thumbnail,image FROM portfolio WHERE id='$id'";
+		$query= mysqli_query($db,$select);
+		$assoc= mysqli_fetch_assoc($query);
+		
+		if ($assoc['total_slug'] > 0) {
+			$slug= $slug.'-'.rand(1,10);
+		}
+
+		$last_id = $id;
+
+		if ($thumbnail != '') {
+			$explode = explode('.',$thumbnail);
+			$end_explode= end($explode);
+			$img_format= ['jpg','png','jpeg','JPEG','JPG','PNG'];
+
+			if (in_array($end_explode,$img_format)) {
+				if ($_FILES["thumbnail"]['size']<1000000) {
+
+					$old_thumbnail='upload/thumbnail'.$assoc['thumbnail'];	
+					if (file_exists($old_thumbnail)) {
+						unlink($old_thumbnail);
+					}
+
+						$thumbnail_ext= $last_id.'.'.$end_explode;
+						$thumbnail_location= 'upload/thumbnail/'.$thumbnail_ext;
+						move_uploaded_file($_FILES['thumbnail']["tmp_name"],$thumbnail_location);
+		
+						$update= "UPDATE portfolio SET  thumbnail='$thumbnail_ext' WHERE id='$last_id'";
+						$update_query= mysqli_query($db,$update);
+						if ($update_query) {
+							header('location:page-portfolio.php');
+						}
+						else {
+							echo "image & data update error";
+						}
+					
+				} 
+				else {
+					echo "Image size is over ";
+				}
+				
+			} else {
+				echo "format is not okk";
+			}
+		} 
+		if ($image != '') {
+			$explode = explode('.',$image);
+			$end_explode= end($explode);
+			$img_format= ['jpg','png','jpeg','JPEG','JPG','PNG'];
+
+			if (in_array($end_explode,$img_format)) {
+				if ($_FILES["image"]['size']<10000000) {
+
+						$old_img_path= 'upload/image'.$assoc['image'];	
+						if (file_exists($old_img_path)) {
+							unlink($old_img_path);
+						}
+						$image_ext= $last_id.'.'.$end_explode;
+						$image_location= 'upload/image/'.$image_ext;
+						move_uploaded_file($_FILES['image']["tmp_name"],$image_location);
+		
+						$update= "UPDATE portfolio SET  image='$image_ext' WHERE id='$last_id'";
+						$update_query= mysqli_query($db,$update);
+						if ($update_query) {
+							header('location:page-portfolio.php');
+						}
+						else {
+							echo "image & data update error";
+						}
+					
+				} 
+				else {
+					echo "Image size is over ";
+				}
+				
+			} else {
+				echo "format is not okk";
+			}
+		}
+		else {
+			$update= "UPDATE portfolio SET  category='$category',title='$title',summary='$summary',slug='$slug' WHERE id='$id'";
+			$update_query= mysqli_query($db,$update);
+			header('location:page-portfolio.php');
+		}
+		
+	}
+	else {
+		echo "plz fill the form";
+	}
+?>
