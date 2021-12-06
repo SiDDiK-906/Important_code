@@ -1,0 +1,19 @@
+# for Mail Trap
+    # MAIL_MAILER=smtp
+    # MAIL_HOST=smtp.mailtrap.io
+    # MAIL_PORT=2525
+    # MAIL_USERNAME=101a6be2091011
+    # MAIL_PASSWORD=ee0e5a9b2f6190
+    # MAIL_ENCRYPTION=tls
+    # MAIL_FROM_ADDRESS='bakar15-906@diu.edu.bd'
+    # MAIL_FROM_NAME="CEO of cube"
+
+# for Gmail
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.gmail.com
+    MAIL_PORT=587
+    MAIL_USERNAME='bakar15-906@diu.edu.bd'
+    MAIL_PASSWORD=dxidtlzdcbzmtzcn
+    MAIL_ENCRYPTION=tls
+    MAIL_FROM_ADDRESS='bakar15-906@diu.edu.bd'
+    MAIL_FROM_NAME="CEO of CUBE"

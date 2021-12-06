@@ -1,0 +1,33 @@
+Get direct help from documentation of [ image.intervention.io ]
+step:1--- 
+	[ composer require intervention/image ]
+step:2--- In the "$providers" array add the service providers for this package.
+    	[ Intervention\Image\ImageServiceProvider::class ]
+	  Add the facade of this package to the "$aliases" array.
+ 	[ 'Image' => Intervention\Image\Facades\Image::class ]
+step:3--- 
+	[ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent" ]
+step:4--- 
+	[ use Intervention\Image\Facades\Image; ] into controller
+==============================================================================
+First time image uploading:
+	$img = Image::make($request->file('image_name'))->resize(600,328);
+        $new_image_path = Auth::id().Auth::user()->name . Str::random(5) .'.'. $request->file('image_name')->getClientOriginalExtension();
+        $img->save(base_path('public/uploads/folder_name/'. $new_image_path));
+==============================================================================
+Image Updating:
+	if ($request->hasFile('image_name')) {
+            $request->validate([
+                'image_name'=> 'image',
+            ]);
+            unlink(base_path('public/uploads/folder_name/'.Table_name::withTrashed()->find($id)->image_name));
+ 
+            $img = Image::make($request->file('image_name'))->resize(600,328);
+            $new_image_path = $request->id . Str::random(5) .'.'. $request->file('image_name')->getClientOriginalExtension();
+            $img->save(base_path('public/uploads/folder_name/'. $new_image_path));
+
+            Table_name::withTrashed()->find($id)->update([
+                'cat_image'=> $new_image_path,
+            ]);
+        }
+=============================================================================
