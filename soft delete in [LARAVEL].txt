@@ -1,0 +1,5 @@
+To also get soft deleted models
+	$trashedAndNotTrashed = Model::withTrashed()->get();
+
+Only soft deleted models in your results
+	$onlySoftDeleted = Model::onlyTrashed()->get();

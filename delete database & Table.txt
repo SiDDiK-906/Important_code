@@ -1,0 +1,4 @@
+for deleting a full databse:
+	DROP DATABASE 'databse-name'
+for deleting a single table:
+	DROP TABLE 'table-name'	

@@ -1,0 +1,5 @@
+<form action="{{ route('category.destroy',$view_cat->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
