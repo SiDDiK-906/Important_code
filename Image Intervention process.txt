@@ -10,6 +10,11 @@ step:3---
 step:4--- 
 	[ use Intervention\Image\Facades\Image; ] into controller
 ==============================================================================
+basic rules:
+	$img = Image::make($request->file('image_name'))
+	$creating_image_name = Str::random(5) .'.'. $request->file('image_name')->getClientOriginalExtension();
+	$img->save(base_path('public/uploads/folder_name/'. $creating_image_name));
+
 First time image uploading:
 	$img = Image::make($request->file('image_name'))->resize(600,328);
         $new_image_path = Auth::id().Auth::user()->name . Str::random(5) .'.'. $request->file('image_name')->getClientOriginalExtension();

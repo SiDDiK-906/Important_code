@@ -17,3 +17,15 @@
     MAIL_ENCRYPTION=tls
     MAIL_FROM_ADDRESS='bakar15-906@diu.edu.bd'
     MAIL_FROM_NAME="CEO of CUBE"
+=========================================================
+# for passing value with email:
+
+    public $rand_password = "";
+    public function __construct($random_password){
+        $this->rand_password = $random_password;
+    }
+    public function build(){
+        return $this->view('email.vendorNotification',[
+            'rand_pass'=>$this->rand_password,
+        ]);
+    }
