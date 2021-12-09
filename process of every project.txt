@@ -1,0 +1,34 @@
+-----------------------------Process of Project------------------------------
+#0  check xamppp[phpversion()] & node js[node -v] [Laravel Extension Pack]
+#1  create laravel app
+#2  create database by app name
+#3  run php artisan migrate command
+#4  run composer require laravel/ui
+#5  run php artisan ui bootstrap --auth
+#6  run npm install
+#7  run npm run dev
+#8  create master page for login/registration
+#9  create master page for backend dashboard
+#10 create master page for frontend template
+#11 role management
+#12 use user seed
+#13 add image of user [use Intervention\Image\Facades\Image;]
+#14 change password of user
+#15 send mail for vendor/employee with checkbox
+#16 add crud of category with image via resourceful controller
+#17 add property like product/student/teacher with multiple image
+#18 use relationship between tables
+#19 use helper function if may need
+#20
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

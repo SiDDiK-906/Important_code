@@ -1,0 +1,65 @@
+Basic rules: Form->checkbox input->outside of foreach take a send button->controller.
+#step 1: ** HTML **
+			<table class="table table-bordered">
+                            <tr>
+                                <th class="text-center">
+                                    Select All <input type="checkbox" id="selectAll" />
+                                </th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                            <form action="{{ route('check_box') }}" method="POST">
+                                @csrf
+
+                                @foreach ($email_offers as $email_offer)
+                                    <tr >
+                                        <td>
+                                            <input type="checkbox" name="check[]" class="form-control" value="{{ $email_offer->id }}">
+                                        </td>
+                                        <td>{{ $loop->index +1 }}</td>
+                                        <td>{{ $email_offer->name }}</td>
+                                        <td>{{ $email_offer->email }}</td>
+                                        <td>
+                                            <a href="{{ route('send_email_offer',$email_offer->id) }}" class="btn btn-sm btn-success">Send</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <td class="text-center">
+                                        <button type="submit" class="btn btn-info">Send</button>
+                                    </td>
+                                </tr>
+
+                            </form>
+                        </table>
+
+#step 2: ** Controller **
+
+public function check_box_method(Request $request){
+        if ($request->check == NULL) {
+            return back()->with('select_one','Please select one at least!');
+        } else {
+            foreach ($request->check as  $value) {
+                Mail::to(User::find($value)->email)->send(new EmailOffer());
+            }
+            return back();
+        }
+    }
+# step 3: ** javascript **
+
+@section('check_box')
+<script src="{{ asset('dashboard') }}/assets/js/jquery-1.12.4.min.js"></script>
+<script src="{{ asset('dashboard') }}/assets/js/jquery.selectallcheckbox.js"></script>
+<script>
+    function onChange( checkboxes, checkedState ) {}
+    $( document ).ready( function() {
+       $( "#selectAll" ).selectAllCheckbox( {
+          checkboxesName   : "check[]",
+          onChangeCallback : onChange,
+          useIndeterminate : false
+       } );
+    } );
+</script>
+@endsection
