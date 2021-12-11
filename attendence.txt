@@ -1,0 +1,8 @@
+=================controller==========
+$date = new DateTime($request->date);
+$formatDate = $date->format('d F Y');
+StudentAttendance::where('attendance_date', $formatDate)->latest()->get();
+===================store===========
+'attendance_date' => Carbon::now()->format('d F Y'),
+===================html===========
+<input type="date" name="date" class="form-control">

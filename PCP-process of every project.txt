@@ -19,16 +19,7 @@
 #17 add property like product/student/teacher with multiple image
 #18 use relationship between tables
 #19 use helper function if may need
-#20
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+#20 date(),format('d F Y'),strtotime(),orderby(),time(),idate()
+...if( strtotime($database_date) > strtotime('now') ) 
+...date("Y-m-d")
+...Date_info::whereBetween('date', [$request->from, $request->to])->get();
